@@ -26,7 +26,7 @@ struct Snake
 
 	Snake()
 	{
-		snake = { 495, 405 , 15 ,15 };
+		snake = { 40, 40 , 40 ,40 };
 		direction = STOP;
 
 	}
@@ -44,7 +44,7 @@ struct Apple
 	Rectangle fruit;
 	Apple()
 	{
-		fruit = { 0,0,15,15 };
+		fruit = { 0,0,40,40 };
 		SpawnApple();
 
 	}
@@ -55,11 +55,11 @@ struct Apple
 	}
 	void SpawnApple()
 	{
-		float randomX = GetRandomValue(0, 65);
-		float randomY = GetRandomValue(0, 53);
+		float randomX = GetRandomValue(0, 24);
+		float randomY = GetRandomValue(0, 19);
 
-		fruit.x = randomX * 15;
-		fruit.y = randomY * 15;
+		fruit.x = randomX * 40;
+		fruit.y = randomY * 40;
 	}
 
 };
@@ -67,7 +67,7 @@ void Snake::DrawTail()
 {
 	for (int i = 0; i < body.size(); i++)
 	{
-		DrawRectangle(body[i].x, body[i].y, 15, 15, RED);
+		DrawRectangle(body[i].x, body[i].y, 40, 40, RED);
 	}
 
 }
@@ -98,7 +98,7 @@ void Snake::Collision()
 
 		}
 	}
-	if ((snake.x == 0 || snake.x >= 1000 || snake.y >= 810 || snake.y == 0))
+	if ((snake.x == 0 || snake.x >= 1000 || snake.y >= 800 || snake.y == 0))
 	{
 		direction = STOP;
 		isgamestopped = true;
@@ -123,19 +123,19 @@ void Snake::MoveSnake()
 	}
 	if (direction == UP)
 	{
-		snake.y -= 15;
+		snake.y -= 40;
 	}
 	if (direction == DOWN)
 	{
-		snake.y += 15;
+		snake.y += 40;
 	}
 	if (direction == LEFT)
 	{
-		snake.x -= 15;
+		snake.x -= 40;
 	}
 	if (direction == RIGHT)
 	{
-		snake.x += 15;
+		snake.x += 40;
 	}
 	
 
@@ -162,8 +162,8 @@ void Snake::ChangeDirection()
 
 int main()
 {
-	InitWindow(1000, 810, "Snake");
-	SetTargetFPS(15);
+	InitWindow(1000, 800, "Snake");
+	SetTargetFPS(10);
 
 
 	
@@ -175,10 +175,9 @@ int main()
 
 			if (snake1.isgamestopped == false)
 			{
+				snake1.ChangeDirection();
 				snake1.MoveSnake();
 				snake1.Collision();
-				snake1.ChangeDirection();
-				fruit.DrawApple();
 				snake1.EatApple(fruit);
 				
 			}
@@ -187,7 +186,7 @@ int main()
 				
 				if (IsKeyPressed(KEY_R))
 				{
-					snake1.snake = {495, 405 , 15 ,15 };
+					snake1.snake = { 40, 40 , 40 ,40 };
 					snake1.direction = STOP;
 					snake1.body.clear();
 					snake1.isgamestopped = false;
@@ -195,18 +194,19 @@ int main()
 			}
 				BeginDrawing();
 				ClearBackground(DARKGREEN);
-				for (int i = 0; i < 1000; i += 15)
+				for (int i = 0; i < 1000; i += 40)
 				{
-					DrawLine(15 + i, 0, 15 + i, 810, BLACK);
+					DrawLine(40 + i, 0, 40 + i, 800, BLACK);
 				}
-				for (int i = 0; i < 810; i += 15)
+				for (int i = 0; i < 800; i += 40)
 				{
-					DrawLine(0, 15 + i, 1000, 15 + i, BLACK);
+					DrawLine(0, 40 + i, 1000, 40 + i, BLACK);
 				}
 				DrawRectangle(snake1.snake.x, snake1.snake.y, snake1.snake.height, snake1.snake.width, RED);
+				fruit.DrawApple();
 				snake1.DrawTail();
 				if(snake1.isgamestopped == true)
-					DrawText("Przegrana, nacisnij 'R' zeby rozpoczac ponownie", 50, 300, 40, BLACK);
+					DrawText("Przegrana, nacisnij 'R' zeby rozpoczac ponownie", 40, 300, 30, BLACK);
 
 
 				EndDrawing();
