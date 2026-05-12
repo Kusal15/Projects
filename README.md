@@ -1,1 +1,1 @@
-# Projects
+W tym repozytorium umieściłem dwa napisane przeze mnie kody w języku C++, które operują na prostej bibliotece "raylib". "Snake" jak i "Dino" to uproszczona wersja znanych gier przeglądarkowych napisana posługując się wiedzą z zajęć programowania obiektowego, a także nabytą nauką ponadprogramową.
